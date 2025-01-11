@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Color Change</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to right, rgb(92, 145, 229), rgb(0, 201, 255));
+        }
+
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .copyCode {
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="button" onclick="changeColors(this)">Button 1</button>
+    <button class="button" onclick="changeColors(this)">Button 2</button>
+    <section>
+        <h2>COPY YOUR CODE HERE</h2>
+        <div class="copyCode" onclick="copyToClipboard(this)">
+            background-image: linear-gradient(to right, rgb(92, 145, 229), rgb(0, 201, 255));
+        </div>
+    </section>
+    <script>
+        function getRandomRGBColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function changeColors(button) {
+            const newColor = getRandomRGBColor();
+            button.style.backgroundColor = newColor;
+
+            const rgb1 = getRandomRGBColor();
+            const rgb2 = getRandomRGBColor();
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+
+            document.querySelector('.copyCode').innerHTML = `background-image: linear-gradient(to right, ${rgb1}, ${rgb2})`;
+        }
+
+        function copyToClipboard(element) {
+            const text = element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Your color is copied!");
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>
